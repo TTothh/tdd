@@ -10,7 +10,7 @@ namespace tdd
 	{
 		public static String Greeting(String input)
 		{
-			bool singleinput = input.Contains(',');
+			bool singleinput = !input.Contains(',');
 
 			if(singleinput)
 			{
@@ -18,9 +18,10 @@ namespace tdd
 			}
 			else
 			{
-				String[] names = input.Split(',');
+				string[] names = input.Split(',');
 
 				StringBuilder sb = new StringBuilder();
+				sb.Append("Hello, ");
 
 				for (int i = 0; i < names.Length; i++)
 				{
