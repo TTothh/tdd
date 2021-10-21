@@ -24,6 +24,12 @@ namespace tdd
 
 				for (int i = 0; i < names.Length; i++)
 				{
+					if (i == names.Length - 1)
+					{
+						sb.Append("and " + names[i]);
+						continue;
+					}
+
 					sb.Append(names[i] + ", ");
 				}
 
