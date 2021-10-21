@@ -13,5 +13,14 @@ namespace tdd_tests
 
 			Assert.Equal("Hello, my friend", msg);
 		}
+
+		[Fact(DisplayName = "Test Greeting for single input")]
+		public void SingleInputGreeting()
+		{
+			String input = "Bob";
+			String greeting = Greeter.Greeting(input);
+
+			Assert.Equal("Hello, Bob", greeting);
+		}
 	}
 }
