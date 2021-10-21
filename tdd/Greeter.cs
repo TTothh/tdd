@@ -10,10 +10,26 @@ namespace tdd
 	{
 		public static String Greeting(String input)
 		{
-			if(input != String.Empty)
+			bool singleinput = input.Contains(',');
+
+			if(singleinput)
 			{
 				return "Hello, " + input;
 			}
+			else
+			{
+				String[] names = input.Split(',');
+
+				StringBuilder sb = new StringBuilder();
+
+				for (int i = 0; i < names.Length; i++)
+				{
+					sb.Append(names[i] + ", ");
+				}
+
+				return sb.ToString();
+			}
+
 			return "Hello, my friend";
 		}
 	}
