@@ -10,6 +10,10 @@ namespace tdd
 	{
 		public static String Greeting(String input)
 		{
+			if(input != String.Empty)
+			{
+				return "Hello, " + input;
+			}
 			return "Hello, my friend";
 		}
 	}
