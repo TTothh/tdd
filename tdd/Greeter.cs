@@ -10,7 +10,7 @@ namespace tdd
 	{
 		public static String Greeting(String input)
 		{
-			return input;
+			return "Hello, my friend";
 		}
 	}
 }
