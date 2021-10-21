@@ -9,7 +9,9 @@ namespace tdd_tests
 		[Fact(DisplayName = "Test Greeter class Greeting function for empty string")]
 		public void EmptyInputGreeting()
 		{
-			
+			String msg = Greeter.Greeting("");
+
+			Assert.Equal("Hello, my friend", msg);
 		}
 	}
 }
