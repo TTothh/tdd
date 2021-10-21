@@ -22,5 +22,14 @@ namespace tdd_tests
 
 			Assert.Equal("Hello, Bob", greeting);
 		}
+
+		[Fact(DisplayName = "Test for multiple inputs")]
+		public void MultipleInputGreeting()
+		{
+			String input = "Bob, Thomas, July";
+			String greeting = Greeter.Greeting(input);
+
+			Assert.Equal("Hello, Bob, Thomas and July", greeting);
+		}
 	}
 }
