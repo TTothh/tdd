@@ -11,16 +11,17 @@ namespace tdd_tests
 		[Fact(DisplayName = "Test Greeter class Greeting function for empty string")]
 		public void EmptyInputGreeting()
 		{
-			String msg = g.Greeting("");
+			string input = "";
+			string greeting = g.Greeting(input);
 
-			Assert.Equal("Hello, my friend", msg);
+			Assert.Equal("Hello, my friend", greeting);
 		}
 
 		[Fact(DisplayName = "Test Greeting for single input")]
 		public void SingleInputGreeting()
 		{
-			String input = "Bob";
-			String greeting = g.Greeting(input);
+			string input = "Bob";
+			string greeting = g.Greeting(input);
 
 			Assert.Equal("Hello, Bob", greeting);
 		}
@@ -28,26 +29,44 @@ namespace tdd_tests
 		[Fact(DisplayName = "Test for multiple inputs")]
 		public void MultipleInputGreeting()
 		{
-			String input = "Bob,Thomas,July";
-			String greeting = g.Greeting(input);
+			string input = "Bob,Thomas,July";
+			string greeting = g.Greeting(input);
 
 			Assert.Equal("Hello, Bob, Thomas and July", greeting);
+		}
+
+		[Fact(DisplayName = "Test for all capital greeting when single input")]
+		public void AllcapitalGreetingSingleInput()
+		{
+			string input = "BOB";
+			string greeting = g.Greeting(input);
+
+			Assert.Equal("HELLO BOB!", greeting);
+		}
+
+		[Fact(DisplayName = "Test for mixed case capital inputs")]
+		public void MixedCaseGreetingMultipleInput()
+		{
+			string input = "JAY,Maya,Alice,BOB,Charlotte";
+			string greeting = g.Greeting(input);
+
+			Assert.Equal("Hello, Maya, Alice and Charlotte. AND HELLO JAY AND BOB!", greeting);
 		}
 
 		[Fact(DisplayName = "Test InputSplitter for different inputs")]
 		public void SplitterTestForEmptyInput()
 		{
-			String input1 = g.Greeting(",");
-			String input2 = g.Greeting(" , ");
-			String input3 = g.Greeting(", ");
-			String input4 = g.Greeting(" ,");
-			String input5 = g.Greeting(" ");
+			string greeting1 = g.Greeting(",");
+			string greeting2 = g.Greeting(" , ");
+			string greeting3 = g.Greeting(", ");
+			string greeting4 = g.Greeting(" ,");
+			string greeting5 = g.Greeting(" ");
 
-			Assert.Equal("Hello, my friend", input1);
-			Assert.Equal("Hello, my friend", input2);
-			Assert.Equal("Hello, my friend", input3);
-			Assert.Equal("Hello, my friend", input4);
-			Assert.Equal("Hello, my friend", input5);
+			Assert.Equal("Hello, my friend", greeting1);
+			Assert.Equal("Hello, my friend", greeting2);
+			Assert.Equal("Hello, my friend", greeting3);
+			Assert.Equal("Hello, my friend", greeting4);
+			Assert.Equal("Hello, my friend", greeting5);
 		}
 	}
 }

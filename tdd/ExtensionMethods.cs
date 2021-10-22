@@ -22,5 +22,20 @@ namespace tdd
 
 			return containsonly;
 		}
+
+		public static bool isCapital(this string str)
+		{
+			bool isUpper = true;
+
+			foreach (char character in str)
+			{
+				if(Char.IsLetter(character) && Char.IsLower(character))
+				{
+					isUpper = false;
+				}
+			}
+
+			return isUpper;
+		}
 	}
 }
