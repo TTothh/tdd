@@ -2,59 +2,53 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace tdd
 {
 	public class Greeter
 	{
+
 		public string Greeting(string input)
 		{
 			string[] names = InputSplitter(input);
 
-			StringBuilder sb = new StringBuilder();
+			StringBuilder sb = new();
 			sb.Append("Hello, ");
 			sb.Append(InputHandler(names));
 
-				for (int i = 0; i < names.Length; i++)
-				{
-					if (i == names.Length - 1)
-					{
-						sb.Append("and " + names[i]);
-						continue;
-					}
-
-					sb.Append(names[i] + ", ");
-				}
-
-				return sb.ToString();
-
-			return "Hello, my friend";
+			return sb.ToString();
 		}
 
 		public string[] InputSplitter(string names)
 		{
 			List<string> output = new List<string>();
 
-			if (names.Equals(String.Empty) || !names.Contains(','))
+			if(names.Equals(string.Empty) || names.ContainsOnly(' '))
 			{
 				return output.ToArray();
+			}
+
+			if (!names.Equals(string.Empty) && !names.Contains(','))
+			{
+				output.Add(names);
 			}
 
 			if(names.Contains(','))
 			{
 				output = names.Split(',').ToList();
-				List<string> temp = new List<string>();
-				foreach (string name in output.Reverse<string>())
-				{
-					name.Trim();
 
-					if(name.Equals(string.Empty)) {
-						output.Remove(name);
+				for(int i = 0; i < output.Count; i++) {
+					output[i].Trim();
+
+					if (output[i].Equals(string.Empty) || output[i].ContainsOnly(' '))
+					{
+						output.Remove(output[i]);
+						i -= 1;
 					}
 				}
 			}
-
 
 			return output.ToArray();
 		}
@@ -71,18 +65,36 @@ namespace tdd
 
 		private string EmptyInputPrinter(string[] names)
 		{
-			return " my friend";
+			return "my friend";
 		}
 
 		private string SingleInputPrinter(string[] names)
 		{
-			return " " + names[0];
+			return names[0];
 		}
 
 		private string MultipleInputPrinter(string[] names)
 		{
+			StringBuilder output = new();
 
-			return "asd";
+			for (int i = 0; i < names.Length; i++)
+			{
+				if (i == names.Length - 1)
+				{
+					output.Append(" and " + names[i]);
+					continue;
+				}
+				else if(i == names.Length -2)
+				{
+					output.Append(names[i]);
+				}
+				else
+				{
+					output.Append(names[i] + ", ");
+				}
+			}
+
+			return output.ToString();
 		}
 	}
 }

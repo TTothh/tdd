@@ -11,13 +11,9 @@ namespace tdd_tests
 		[Fact(DisplayName = "Test Greeter class Greeting function for empty string")]
 		public void EmptyInputGreeting()
 		{
-			String msg1 = g.Greeting("");
-			String msg2 = g.Greeting(",");
-			String msg3 = g.Greeting(" , ");
-			String msg4 = g.Greeting(", ");
-			String msg5 = g.Greeting(" ,");
+			String msg = g.Greeting("");
 
-			Assert.Equal("Hello, my friend", msg1);
+			Assert.Equal("Hello, my friend", msg);
 		}
 
 		[Fact(DisplayName = "Test Greeting for single input")]
@@ -45,11 +41,13 @@ namespace tdd_tests
 			String input2 = g.Greeting(" , ");
 			String input3 = g.Greeting(", ");
 			String input4 = g.Greeting(" ,");
+			String input5 = g.Greeting(" ");
 
-			Assert.Empty(input1);
-			Assert.Empty(input2);
-			Assert.Empty(input3);
-			Assert.Empty(input4);
+			Assert.Equal("Hello, my friend", input1);
+			Assert.Equal("Hello, my friend", input2);
+			Assert.Equal("Hello, my friend", input3);
+			Assert.Equal("Hello, my friend", input4);
+			Assert.Equal("Hello, my friend", input5);
 		}
 	}
 }
