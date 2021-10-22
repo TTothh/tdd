@@ -6,7 +6,8 @@ namespace tdd
 	{
 		static void Main(string[] args)
 		{
-			String greeting = Greeter.Greeting("Bob,Thomas,July");
+			Greeter g = new Greeter();
+			String greeting = g.Greeting("Bob,Thomas,July");
 			Console.WriteLine(greeting);
 		}
 	}
