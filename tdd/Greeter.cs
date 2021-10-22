@@ -9,7 +9,6 @@ namespace tdd
 {
 	public class Greeter
 	{
-
 		public string Greeting(string input)
 		{
 			string[] names = InputSplitter(input);
@@ -20,16 +19,19 @@ namespace tdd
 			return sb.ToString();
 		}
 
+		//Felép a bemeneti stringből egy tömböt amivel könnyeben lehet dolgozni
 		public string[] InputSplitter(string names)
 		{
 			List<string> output = new List<string>();
 
+			//Ha üres vagy csak szóközöket tartalmazó az input akkor üres tömbbel visszatérünk
 			if(names.Equals(string.Empty) || names.ContainsOnly(' '))
 			{
 				return output.ToArray();
 			}
 
-			if (!names.Equals(string.Empty) && !names.Contains(','))
+			//ne üres de nincs benne ',' akkor single input van
+			if (!names.Equals(string.Empty) && !names.Contains(',') && !names.ContainsOnly(' '))
 			{
 				output.Add(names);
 			}
@@ -38,6 +40,7 @@ namespace tdd
 			{
 				output = names.Split(',').ToList();
 
+				//Kiveszem az output-ból az üres/nem szabályos elemeket.
 				for(int i = 0; i < output.Count; i++) {
 					output[i].Trim();
 
@@ -52,6 +55,7 @@ namespace tdd
 			return output.ToArray();
 		}
 
+		//A kapott tömb hossza alapján eldől hogy hogyan lesz feldolgozva az input
 		public string InputHandler(string[] names)
 		{
 			return names.Length switch
@@ -88,7 +92,8 @@ namespace tdd
 			string output = "";
 
 			bool mixed = false;
-
+			
+			//Az input összetétele alapján felépítem az output-ot.
 			foreach (string name in names)
 			{
 				if(name.isCapital())
@@ -109,17 +114,22 @@ namespace tdd
 			return output;
 		}
 
+
+		//Ha nincs kapitalizált név az inputban akkor ez a function építi föl az inputot
 		private string LowercaseInputPrinter(string[] names)
 		{
 			StringBuilder output = new();
 
 			for (int i = 0; i < names.Length; i++)
 			{
+				//utolsó elem előtt 'and'
 				if (i == names.Length - 1)
 				{
 					output.Append(" and " + names[i]);
 					continue;
 				}
+
+				//ez megspórolható lett volna ha tudnék olvasni. 'and' előtt is van ',' csak nem vettem észre...
 				else if (i == names.Length - 2)
 				{
 					output.Append(names[i]);
@@ -133,6 +143,8 @@ namespace tdd
 			return "Hello, " + output.ToString();
 		}
 
+
+		//Ha van kapitalizált név, akkor ez a függvény kezeli a kirítást
 		private string MixedInputPrinter(string[] names)
 		{
 			StringBuilder output = new();
@@ -142,7 +154,7 @@ namespace tdd
 
 			foreach (string name in names)
 			{
-				if(name.isCapital())
+				if (name.isCapital())
 				{
 					capital.Add(name);
 				}
@@ -152,16 +164,21 @@ namespace tdd
 				}
 			}
 
+			//normál és kapitlás rész felépítése
+			string LowerCasePart = GreetingPartBuilder(lower);
+			string CapitalCasePart = GreetingPartBuilder(capital).ToUpper();
+
 			output.Append("Hello, ")
-				  .Append(LowerCaseGreetingBuilder(lower))
+				  .Append(LowerCasePart)
 				  .Append(". AND HELLO ")
-				  .Append(CapitalCaseGreetingBuilder(capital))
+				  .Append(CapitalCasePart)
 				  .Append('!');
 			
 			return output.ToString();
 		}
 
-		private string LowerCaseGreetingBuilder(List<string> names)
+		//üzenetrész felépítése rész felépítése
+		private string GreetingPartBuilder(List<string> names)
 		{
 			StringBuilder output = new();
 
@@ -183,30 +200,6 @@ namespace tdd
 			}
 
 			return output.ToString();
-		}
-
-		private string CapitalCaseGreetingBuilder(List<string> names)
-		{
-			StringBuilder output = new();
-
-			for (int i = 0; i < names.Count; i++)
-			{
-				if (i == names.Count - 1)
-				{
-					output.Append(" and " + names[i]);
-					continue;
-				}
-				else if (i == names.Count - 2)
-				{
-					output.Append(names[i]);
-				}
-				else
-				{
-					output.Append(names[i] + ", ");
-				}
-			}
-
-			return output.ToString().ToUpper();
 		}
 	}
 }

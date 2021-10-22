@@ -8,6 +8,8 @@ namespace tdd
 {
 	public static class ExtensionMethods
 	{
+
+		//Ellenőrzi hogy a string csak egy karakterből áll-e.
 		public static bool ContainsOnly(this string str, char singular)
 		{
 			bool containsonly = true;
@@ -23,6 +25,7 @@ namespace tdd
 			return containsonly;
 		}
 
+		//Ellenrőzi hogy az adott string csak nagybetűkből áll-e.
 		public static bool isCapital(this string str)
 		{
 			bool isUpper = true;
