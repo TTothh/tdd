@@ -44,8 +44,8 @@ namespace tdd
 			if(names.Contains(','))
 			{
 				output = names.Split(',').ToList();
-
-				foreach (string name in output)
+				List<string> temp = new List<string>();
+				foreach (string name in output.Reverse<string>())
 				{
 					name.Trim();
 
